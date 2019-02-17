@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#feel free to remove the following line if you're using a different IDE
+/.idea
