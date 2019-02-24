@@ -6,15 +6,26 @@ class UsersList extends Component {
     constructor(props) {
         super(props);
         this.state= {
-            users: []
+            users: [{id: 0, name: 'Ionel'}, {id: 1, name:'Anca'}]
         }
     }
 
+    renderUsersList = (users) => (
+        <ul>
+            {
+            users.map((user) => (
+                <li key={user.id}>
+                    {user.name}
+                </li>
+            ))
+            }
+        </ul>
+    );
+
     render() {
+        let { users } = this.state;
         return (
-            <ul>
-                <li>Some text</li>
-            </ul>
+            users.length && this.renderUsersList(users)
         );
     }
 }
