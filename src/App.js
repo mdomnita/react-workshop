@@ -1,18 +1,12 @@
 import React, { Component } from 'react';
 import './styles/App.css';
-import Button from './components/common/Button';
+import UsersList from "./components/UsersList";
 
 class App extends Component {
   render() {
     return (
       <div className='App'>
-          <Button
-              text={'Click me'}
-              onClick={()=> {
-                  console.log('clicked')
-              }}
-              classname={'large-btn'}
-          />
+          <UsersList/>
       </div>
     );
   }
