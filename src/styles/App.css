@@ -19,3 +19,9 @@ code {
   justify-content: center;
   align-items: center
 }
+
+button.large-btn {
+  border-radius: 5px;
+  font-size: 16px;
+  height: 35px;
+}

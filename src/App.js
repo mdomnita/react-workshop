@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './styles/App.css';
-import Button from './components/Button';
+import Button from './components/common/Button';
 
 class App extends Component {
   render() {
@@ -11,7 +11,7 @@ class App extends Component {
               onClick={()=> {
                   console.log('clicked')
               }}
-              isDisabled={true} //feel free to remove this after making sure it works
+              classname={'large-btn'}
           />
       </div>
     );
