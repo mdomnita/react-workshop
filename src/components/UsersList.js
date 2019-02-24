@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import UserListItem from "./UserListItem";
 
 const GET_USERS_ENDPOINT = "https://jsonplaceholder.typicode.com/users";
 
@@ -18,20 +19,15 @@ class UsersList extends Component {
     }
 
     renderUsersList = (users) => (
-        <ul>
+        <ul className={'users-list-container'}>
             {
-            users.map((user) => (
-                <li key={user.id}>
-                    {user.name}
-                </li>
-            ))
+            users.map((user) => (<UserListItem key={user.id} user={user}/>))
             }
         </ul>
     );
 
     render() {
         let { users } = this.state;
-        console.log('Notice when render gets called, depending on the state update');
         console.log('users: ', users);
         return (
             users.length && this.renderUsersList(users)
