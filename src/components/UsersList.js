@@ -1,38 +1,104 @@
-import React, { Component } from 'react';
-import UserListItem from "./UserListItem";
+import React, {Component} from 'react';
+import UserListItem from './UserListItem';
+import UserForm from './UserForm';
+import mockApi from '../utils/mockApi';
+import { withStyles } from '@material-ui/core/styles'
+import Button from './common/Button';
 
-const GET_USERS_ENDPOINT = "https://jsonplaceholder.typicode.com/users";
 
 class UsersList extends Component {
 
     constructor(props) {
         super(props);
         this.state= {
-            users: [{id: 0, name: 'Ionel'}, {id: 1, name:'Anca'}]
+            users: [],
+            isFormOpen: false,
+            isAddMode: false,
+            currentUserClicked: null
         }
     }
 
+    openUserForm = (userId, isAddMode) => {
+        this.setState({
+            currentUserClicked: userId,
+            isFormOpen: true,
+            isAddMode
+        })
+    };
+
+    closeUserForm = () => {
+        this.setState({
+            currentUserClicked: null,
+            isFormOpen: false
+        })
+    };
+
+    onUserFormSubmit = (user) => {
+        console.log(user);
+        if (this.state.isAddMode) {
+            mockApi.addUser(user).then(this.fetchUsers)
+        } else {
+            mockApi.updateUser(user).then(this.fetchUsers)
+        }
+        this.closeUserForm()
+    }
+
+    onUserDelete = (userId) => {
+        mockApi.deleteUser(userId).then(this.fetchUsers)
+        this.closeUserForm()
+    }
+
     componentDidMount() {
-        fetch(GET_USERS_ENDPOINT)
-            .then(response => response.json())
-            .then(users => this.setState({users}))
+        this.fetchUsers();
+    }
+
+    fetchUsers = () => {
+        mockApi.fetchUsers().then((users)=> {
+            this.setState({users})
+        })
     }
 
     renderUsersList = (users) => (
         <ul className={'users-list-container'}>
             {
-            users.map((user) => (<UserListItem key={user.id} user={user}/>))
+            users.map((user) => (
+                <UserListItem key={user.id} user={user} openUserForm={this.openUserForm}/>
+            ))
             }
         </ul>
     );
 
     render() {
-        let { users } = this.state;
-        console.log('users: ', users);
+        const { classes } = this.props;
+        let { users, isAddMode, isFormOpen, currentUserClicked } = this.state;
         return (
-            users.length && this.renderUsersList(users)
+            <div className={classes.root} style={{marginTop: 40, borderRadius: 5}}>
+                {isFormOpen ?
+                    <UserForm
+                        isAddMode={isAddMode}
+                        userId={currentUserClicked}
+                        onSubmit={this.onUserFormSubmit}
+                        onDelete={this.onUserDelete}
+                        onCancel={this.closeUserForm}
+                    /> :
+                    <>
+                        {users.length && this.renderUsersList(users)}
+                        <Button text={'Add user'} onClick={()=> {this.openUserForm(null, true)}}/>
+                    </>
+                }
+            </div>
         );
-    }
+    };
 }
 
-export default UsersList;
+const styles = theme => ({
+    root: {
+        width: 500,
+        height: 600
+    },
+    progress: {
+        margin: theme.spacing.unit * 2
+    }
+})
+
+export default withStyles(styles)(UsersList);
