@@ -41,12 +41,12 @@ class UsersList extends Component {
             mockApi.updateUser(user).then(this.fetchUsers)
         }
         this.closeUserForm()
-    }
+    };
 
     onUserDelete = (userId) => {
         mockApi.deleteUser(userId).then(this.fetchUsers)
         this.closeUserForm()
-    }
+    };
 
     componentDidMount() {
         this.fetchUsers();
@@ -56,7 +56,7 @@ class UsersList extends Component {
         mockApi.fetchUsers().then((users)=> {
             this.setState({users})
         })
-    }
+    };
 
     renderUsersList = (users) => (
         <ul className={'users-list-container'}>
@@ -72,7 +72,7 @@ class UsersList extends Component {
         const { classes } = this.props;
         let { users, isAddMode, isFormOpen, currentUserClicked } = this.state;
         return (
-            <div className={classes.root} style={{marginTop: 40, borderRadius: 5}}>
+            <div className={classes.root}>
                 {isFormOpen ?
                     <UserForm
                         isAddMode={isAddMode}
@@ -91,14 +91,15 @@ class UsersList extends Component {
     };
 }
 
-const styles = theme => ({
+const styles = () => ({
     root: {
-        width: 500,
-        height: 600
-    },
-    progress: {
-        margin: theme.spacing.unit * 2
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: 450,
+        height: 700,
+        borderRadius: 5
     }
-})
+});
 
 export default withStyles(styles)(UsersList);

@@ -23,13 +23,10 @@ class UserForm extends Component {
     }
 
     componentDidMount() {
-        if (this.props.userId !== null) {
+        if (!this.props.isAddMode) {
             mockApi.fetchUserById(this.props.userId).then((user)=>{
                 this.setState({user})
             })
-        }
-        else {
-            console.log('Is Add mode')
         }
 
     }
@@ -46,7 +43,7 @@ class UserForm extends Component {
                 console.log(`nope, you probably didn't wanna reach this`)
 
         }
-    }
+    };
 
     handleChange = field => e => {
 
@@ -68,7 +65,7 @@ class UserForm extends Component {
 
 
     render() {
-        let {classes, userId, isAddMode} = this.props;
+        let {classes, isAddMode} = this.props;
         let {user} = this.state;
 
         let ageMenuItems = [];
@@ -115,8 +112,8 @@ class UserForm extends Component {
                         />
                         <Divider/>
                         <div>
+                            <Button onClick={this.props.onCancel} text={'Go back'} classname={'cancel'}/>
                             <Button text={'Save'} onClick={() => {this.onSubmit('save')}} />
-                            <Button onClick={this.props.onCancel} text={'Go back'}/>
                             {!isAddMode && <Button text={'Delete'} onClick={()=>{this.onSubmit('delete')}}/>}
                         </div>
                     </div>
@@ -135,28 +132,28 @@ UserForm.propTypes = {
 
 
 const styles = theme => ({
-    button: {
-        margin: theme.spacing.unit,
-        fontWeight: 560
-    },
     container: {
+        width: 380,
+        height: 420,
         display: 'flex',
-        flexWrap: 'wrap',
+        flexDirection: 'column',
         justifyContent: 'center',
-        backgroundColor: theme.palette.background.paper
+        alignItems: 'center',
+        alignContent: 'space-between',
+        backgroundColor: theme.palette.background.paper,
+        borderRadius: 5
     },
     textField: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
+        marginBottom: 30,
         width: 300
     },
     formControl: {
-        margin: theme.spacing.unit,
+        marginBottom: 30,
         width: 300
     },
     progress: {
         margin: theme.spacing.unit * 2
     }
-})
+});
 
 export default withStyles(styles)(UserForm);

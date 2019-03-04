@@ -20,6 +20,17 @@ code {
   align-items: center;
 }
 
+button {
+  border-radius: 5px;
+  height: 28px;
+  margin: 3px 7px;
+  padding: 6px;
+}
+
+button.cancel {
+  margin-right: 55px;
+}
+
 button.large-btn {
   border-radius: 5px;
   font-size: 16px;
