@@ -6,11 +6,11 @@ let USERS = [
 const ONE_SECOND = 1000;
 
 const mockApi = {
-    fetchUsers: async () => resolveAfter1Second({type: "fetchUsers"}),
-    fetchUserById: async (id) => resolveAfter1Second({type: "fetchUserById", id}),
-    addUser: async (user) => resolveAfter1Second({type: "addUser", user}),
-    updateUser: async (user) => resolveAfter1Second({type: "updateUser", user}),
-    deleteUser: async (id) => resolveAfter1Second({type: "deleteUser", id})
+    fetchUsers: () => resolveAfter1Second({type: "fetchUsers"}),
+    fetchUserById: (id) => resolveAfter1Second({type: "fetchUserById", id}),
+    addUser: (user) => resolveAfter1Second({type: "addUser", user}),
+    updateUser: (user) => resolveAfter1Second({type: "updateUser", user}),
+    deleteUser: (id) => resolveAfter1Second({type: "deleteUser", id})
 };
 
 const resolveAfter1Second = (action) => {
