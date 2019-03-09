@@ -81,10 +81,10 @@ class UsersList extends Component {
                         onDelete={this.onUserDelete}
                         onCancel={this.closeUserForm}
                     /> :
-                    <>
-                        {users.length && this.renderUsersList(users)}
+                    <div>
+                        {!!users.length && this.renderUsersList(users)}
                         <Button text={'Add user'} onClick={()=> {this.openUserForm(null, true)}}/>
-                    </>
+                    </div>
                 }
             </div>
         );
