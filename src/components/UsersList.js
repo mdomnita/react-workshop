@@ -4,6 +4,7 @@ import UserForm from './UserForm';
 import mockApi from '../utils/mockApi';
 import { withStyles } from '@material-ui/core/styles'
 import Button from './common/Button';
+import {Link} from 'react-router-dom';
 
 
 class UsersList extends Component {
@@ -44,7 +45,7 @@ class UsersList extends Component {
     };
 
     onUserDelete = (userId) => {
-        mockApi.deleteUser(userId).then(this.fetchUsers)
+        mockApi.deleteUser(userId).then(this.fetchUsers);
         this.closeUserForm()
     };
 
@@ -86,6 +87,7 @@ class UsersList extends Component {
                         <Button text={'Add user'} onClick={()=> {this.openUserForm(null, true)}}/>
                     </div>
                 }
+                <Link to={'/contact'}> <Button text={'Contact Page'}/> </Link>
             </div>
         );
     };
