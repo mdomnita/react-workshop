@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import UserListItem from './UserListItem';
 import mockApi from '../utils/mockApi';
 
 class UsersList extends Component {
@@ -21,12 +22,10 @@ class UsersList extends Component {
     };
 
     renderUsersList = (users) => (
-        <ul>
+        <ul className={'users-list-container'}>
             {
                 users.map((user) => (
-                    <li key={user.id}>
-                        {user.name}
-                    </li>
+                    <UserListItem key={user.id} user={user}/>
                 ))
             }
         </ul>
@@ -34,7 +33,6 @@ class UsersList extends Component {
 
     render() {
         let { users } = this.state;
-        console.log('Notice when render gets called, depending on the state update');
         console.log('users: ', users);
         return (
             users.length && this.renderUsersList(users)
