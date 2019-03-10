@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-
-const GET_USERS_ENDPOINT = "https://jsonplaceholder.typicode.com/users";
+import mockApi from '../utils/mockApi';
 
 class UsersList extends Component {
 
@@ -12,10 +11,14 @@ class UsersList extends Component {
     }
 
     componentDidMount() {
-        fetch(GET_USERS_ENDPOINT)
-            .then(response => response.json())
-            .then(users => this.setState({users}))
+        this.fetchUsers();
     }
+
+    fetchUsers = () => {
+        mockApi.fetchUsers().then((users)=> {
+            this.setState({users})
+        })
+    };
 
     renderUsersList = (users) => (
         <ul>
