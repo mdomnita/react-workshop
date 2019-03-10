@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import UserListItem from './UserListItem';
+import UserForm from './UserForm';
 import mockApi from '../utils/mockApi';
 
 class UsersList extends Component {
@@ -7,7 +8,9 @@ class UsersList extends Component {
     constructor(props) {
         super(props);
         this.state= {
-            users: [{id: 0, name: 'Ionel'}, {id: 1, name:'Anca'}]
+            users: [],
+            isFormOpen: true,
+            currentUserClicked: 1
         }
     }
 
@@ -32,10 +35,14 @@ class UsersList extends Component {
     );
 
     render() {
-        let { users } = this.state;
-        console.log('users: ', users);
+        let { users, isFormOpen, currentUserClicked } = this.state;
         return (
-            users.length && this.renderUsersList(users)
+            <div>
+                {isFormOpen ?
+                    <UserForm userId={currentUserClicked}/> :
+                    users.length && this.renderUsersList(users)
+                }
+            </div>
         );
     }
 }
