@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './styles/App.css';
 import UsersList from './components/UsersList';
-import Notfound from './components/common/NotFound';
-import ContactPage from './components/common/Contact';
+import Notfound from './components/staticPages/NotFound';
+import ContactPage from './components/staticPages/Contact';
 
 class App extends Component {
   render() {
