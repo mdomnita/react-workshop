@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+const GET_USERS_ENDPOINT = "https://jsonplaceholder.typicode.com/users";
 
 class UsersList extends Component {
 
@@ -8,6 +9,12 @@ class UsersList extends Component {
         this.state= {
             users: [{id: 0, name: 'Ionel'}, {id: 1, name:'Anca'}]
         }
+    }
+
+    componentDidMount() {
+        fetch(GET_USERS_ENDPOINT)
+            .then(response => response.json())
+            .then(users => this.setState({users}))
     }
 
     renderUsersList = (users) => (
@@ -24,6 +31,8 @@ class UsersList extends Component {
 
     render() {
         let { users } = this.state;
+        console.log('Notice when render gets called, depending on the state update');
+        console.log('users: ', users);
         return (
             users.length && this.renderUsersList(users)
         );
