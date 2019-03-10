@@ -11,7 +11,7 @@ class App extends Component {
                 onClick={()=> {
                     console.log('clicked')
                 }}
-                isDisabled={true} //feel free to remove this or set to false after making sure it works
+                classname={'large-btn'}
             />
         </div>
     );
