@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
+import Button from './components/Button';
 import './styles/App.css';
 
 class App extends Component {
   render() {
-    const buttonText = 'Click me';
     return (
-      <div className='App'>
-        <button>{buttonText}</button>
-      </div>
+        <div className='App'>
+            <Button
+                text={'Click me'}
+                onClick={()=> {
+                    console.log('clicked')
+                }}
+                isDisabled={true} //feel free to remove this or set to false after making sure it works
+            />
+        </div>
     );
   }
 }
