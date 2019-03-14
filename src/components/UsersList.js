@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+const GET_USERS = "https://jsonplaceholder.typicode.com/users";
 
 class UsersList extends Component {
 
@@ -10,8 +11,8 @@ class UsersList extends Component {
         }
     }
 
-    renderUsersList = (users) => (
-        <ul>
+    renderUsersList = function (users) {
+        return (<ul>
             {
                 users.map((user) => (
                     <li key={user.id}>
@@ -19,9 +20,15 @@ class UsersList extends Component {
                     </li>
                 ))
             }
-        </ul>
-    );
+        </ul>)
+    }
 
+    componentDidMount() {
+        fetch(GET_USERS)
+            .then(response => response.json())
+            .then(users => this.setState({users}))
+    }
+    
     render() {
         let { users } = this.state;
         return (
